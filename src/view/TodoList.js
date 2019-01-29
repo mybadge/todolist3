@@ -38,7 +38,7 @@ class TodoList extends React.Component {
 
     handleBtnClickAction() { 
         var text = this.state.inputValue;
-        if (text.length == 0) {
+        if (text.length === 0) {
             //alert("item can't be null");
             return;
         }

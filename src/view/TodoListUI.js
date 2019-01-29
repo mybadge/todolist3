@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { Input, Button, List, Modal } from 'antd';
+import React from 'react'
+import { Input, Button, List } from 'antd';
 
 const TodoListUI = (props) => {
     return (<div style={{margin: 15}}>

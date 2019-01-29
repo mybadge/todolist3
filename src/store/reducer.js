@@ -22,7 +22,7 @@ import { ADD_TODO, TODO_TEXT_CHANGE, DELETE_TODO, ADD_TODO_ITEM } from "../actio
             newState.list.push(newState.inputValue)
             newState.inputValue = '';
             return newState;
-
+        default:
+            return state
     }
-     return state;
  }
