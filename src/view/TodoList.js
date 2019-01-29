@@ -1,7 +1,7 @@
 import React from 'react';
 import { Input, Button, List, Alert, Modal } from 'antd';
 import store from './../store';
-import { addTodo, textChange, deleteTodoItem } from '../action/action';
+import { addTodo, textChange, deleteTodoItem, add_todo_item } from '../action/action';
 
 // const data = [
 //   'Racing car sprays burning fuel into crowd.',
@@ -62,12 +62,10 @@ class TodoList extends React.Component {
     handBtnClickAction() { 
         var text = this.state.inputValue;
         if (text.length == 0) {
-            //Alert.log();
-            alert("item can't be null");
+            //alert("item can't be null");
             return;
         }
-        store.dispatch(addTodo(this.state.inputValue));
-        console.log("add item");
+        store.dispatch(add_todo_item());
     }
 
     handleStoreChange() {
@@ -81,20 +79,21 @@ class TodoList extends React.Component {
     }
 
     showDeleteConfirm(tip, index) {
-        Modal.confirm({
-          title: tip,
-          content: 'Some descriptions',
-          okText: 'Yes',
-          okType: 'danger',
-          cancelText: 'No',
-          onOk() {
-            store.dispatch(deleteTodoItem(index))
-            console.log('OK');
-          },
-          onCancel() {
-            console.log('Cancel');
-          },
-        });
+        store.dispatch(deleteTodoItem(index))
+        // Modal.confirm({
+        //   title: tip,
+        //   content: 'Some descriptions',
+        //   okText: 'Yes',
+        //   okType: 'danger',
+        //   cancelText: 'No',
+        //   onOk() {
+        //     //store.dispatch(deleteTodoItem(index))
+        //     console.log('OK');
+        //   },
+        //   onCancel() {
+        //     console.log('Cancel');
+        //   },
+        // });
     }
 }
 

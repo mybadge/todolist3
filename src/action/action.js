@@ -3,8 +3,9 @@
  */
 
 export const ADD_TODO = 'ADD_TODO'
+export const ADD_TODO_ITEM = 'ADD_TODO_ITEM'
 export const DELETE_TODO = 'DELETE_TODO'
-export const TODO_Text_Change = 'TODO_Text_Change'
+export const TODO_TEXT_CHANGE = 'TODO_Text_Change'
 export const TOGGLE_TODO = 'TOGGLE_TODO'
 export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER'
 
@@ -21,12 +22,16 @@ export const VisibilityFilters = {
  * action 创建函数
  */
 
+export const add_todo_item = () => {
+  return { type: ADD_TODO_ITEM }
+};
+
 export function addTodo(text) {
   return { type: ADD_TODO, inputValue: text }
 }
 
 export function textChange(text) {
-  return { type: TODO_Text_Change, inputValue: text }
+  return { type: TODO_TEXT_CHANGE, inputValue: text }
 }
 
 export function deleteTodoItem(index) {
