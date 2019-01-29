@@ -1,7 +1,8 @@
 import React from 'react';
-import { Input, Button, List, Alert, Modal } from 'antd';
 import store from './../store';
-import { addTodo, textChange, deleteTodoItem, add_todo_item } from '../action/action';
+import { textChange, deleteTodoItem, add_todo_item } from '../action/action';
+import TodoListUI from './TodoListUI';
+
 
 class TodoList extends React.Component {
 
@@ -12,37 +13,21 @@ class TodoList extends React.Component {
       console.log(this.state);
 
       this.handleInputValueChange = this.handleInputValueChange.bind(this);
-      this.handBtnClickAction = this.handBtnClickAction.bind(this);
-      this.handleStoreChange = this.handleStoreChange.bind(this);
+      this.handleBtnClickAction = this.handleBtnClickAction.bind(this);
+			this.handleStoreChange = this.handleStoreChange.bind(this);
+			this.handleItemDeleteClick = this.handleItemDeleteClick.bind(this);
       store.subscribe(this.handleStoreChange);
     }
 
     render() {
         return (
-            <div style={{margin: 15}}>
-                <Input 
-                    placeholder="todo item" 
-                    value={this.state.inputValue} 
-                    style={{width:200}} 
-                    onChange={this.handleInputValueChange}
-                />
-                <Button type="primary" style={{marginLeft:15}} onClick={this.handBtnClickAction} >Add</Button>
-                <div>
-                  <List style={{width:270, marginTop:15}}
-                    size="small"
-                    // header={<div>Header</div>}
-                    //footer={<div>Footer</div>}
-                    bordered
-                    dataSource={this.state.list}
-                    //pageSize={10}
-                    renderItem={(item, index) => (
-                        <List.Item onClick={this.handItemDeleteClick.bind(this, index)}
-                        >{item}</List.Item>
-                    )}
-                  />
-                </div>
-            </div>
-            
+            <TodoListUI 
+								inputValue={this.state.inputValue} 
+								list={this.state.list}
+								handleInputValueChange={this.handleInputValueChange}
+								handleBtnClickAction={this.handleBtnClickAction}
+								handleItemDeleteClick={this.handleItemDeleteClick}
+            />
         )
     }
 
@@ -51,7 +36,7 @@ class TodoList extends React.Component {
         store.dispatch(textChange(e.target.value));
     }
 
-    handBtnClickAction() { 
+    handleBtnClickAction() { 
         var text = this.state.inputValue;
         if (text.length == 0) {
             //alert("item can't be null");
@@ -65,7 +50,7 @@ class TodoList extends React.Component {
         this.setState(store.getState());
     }
 
-    handItemDeleteClick(index){
+    handleItemDeleteClick(index){
         this.showDeleteConfirm('Are you sure delete this item', index);
         console.log("index="+index);
     }
