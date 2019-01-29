@@ -5,7 +5,7 @@ import App from './App';
 
 import * as serviceWorker from './serviceWorker';
 
-import TodoList from './TodoList';
+import TodoList from './view/TodoList';
 
 ReactDOM.render(<TodoList />, document.getElementById('root'));
 
