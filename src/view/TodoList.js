@@ -1,8 +1,8 @@
 import React from 'react';
 import store from './../store';
-import { textChange, deleteTodoItem, add_todo_item } from '../action/action';
+import { textChange, deleteTodoItem, add_todo_item, initListAction } from '../action/action';
 import TodoListUI from './TodoListUI';
-
+import axios from 'axios';
 
 class TodoList extends React.Component {
 
@@ -29,7 +29,17 @@ class TodoList extends React.Component {
 								handleItemDeleteClick={this.handleItemDeleteClick}
             />
         )
-    }
+		}
+		
+		componentWillMount() {
+			axios.get('http://localhost/todolist/list.json').then((res)=> {
+				console.log(res.data);
+				store.dispatch(initListAction(res.data));
+
+			}).catch((e)=> {
+				console.log("e:" + e);
+			})
+		}
 
     handleInputValueChange(e) {
         console.log("aa=" + e.target.value);

@@ -8,6 +8,7 @@ export const DELETE_TODO = 'DELETE_TODO'
 export const TODO_TEXT_CHANGE = 'TODO_Text_Change'
 export const TOGGLE_TODO = 'TOGGLE_TODO'
 export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER'
+export const INIT_TODO_LIST = 'init_todo_list'
 
 /*
  * 其它的常量
@@ -25,6 +26,13 @@ export const VisibilityFilters = {
 export const add_todo_item = () => {
   return { type: ADD_TODO_ITEM }
 };
+
+export const initListAction = (data) => {
+  return {
+    type: INIT_TODO_LIST,
+    data
+  }
+}
 
 export function addTodo(text) {
   return { type: ADD_TODO, inputValue: text }

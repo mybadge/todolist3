@@ -1,4 +1,4 @@
-import { ADD_TODO, TODO_TEXT_CHANGE, DELETE_TODO, ADD_TODO_ITEM } from "../action/action";
+import { ADD_TODO, TODO_TEXT_CHANGE, DELETE_TODO, ADD_TODO_ITEM, INIT_TODO_LIST } from "../action/action";
 
  const defaultState = {
      inputValue: '',
@@ -8,6 +8,9 @@ import { ADD_TODO, TODO_TEXT_CHANGE, DELETE_TODO, ADD_TODO_ITEM } from "../actio
  export default (state = defaultState, action) => {
     const newState = JSON.parse(JSON.stringify(state));
     switch (action.type) {
+        case INIT_TODO_LIST:
+            newState.list = action.data;
+            return newState
         case TODO_TEXT_CHANGE:
             newState.inputValue = action.inputValue;
             return newState;
