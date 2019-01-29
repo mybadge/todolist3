@@ -1,7 +1,7 @@
 import React from 'react';
-import { Input, Button, List } from 'antd';
+import { Input, Button, List, Alert, Modal } from 'antd';
 import store from './../store';
-import { addTodo, textChange } from '../action/action';
+import { addTodo, textChange, deleteTodoItem } from '../action/action';
 
 // const data = [
 //   'Racing car sprays burning fuel into crowd.',
@@ -43,7 +43,10 @@ class TodoList extends React.Component {
                     bordered
                     dataSource={this.state.list}
                     //pageSize={10}
-                    renderItem={item => (<List.Item>{item}</List.Item>)}
+                    renderItem={(item, index) => (
+                        <List.Item onClick={this.handItemDeleteClick.bind(this, index)}
+                        >{item}</List.Item>
+                    )}
                   />
                 </div>
             </div>
@@ -56,7 +59,13 @@ class TodoList extends React.Component {
         store.dispatch(textChange(e.target.value));
     }
 
-    handBtnClickAction() {
+    handBtnClickAction() { 
+        var text = this.state.inputValue;
+        if (text.length == 0) {
+            //Alert.log();
+            alert("item can't be null");
+            return;
+        }
         store.dispatch(addTodo(this.state.inputValue));
         console.log("add item");
     }
@@ -64,6 +73,28 @@ class TodoList extends React.Component {
     handleStoreChange() {
         console.log(store.getState());
         this.setState(store.getState());
+    }
+
+    handItemDeleteClick(index){
+        this.showDeleteConfirm('Are you sure delete this item', index);
+        console.log("index="+index);
+    }
+
+    showDeleteConfirm(tip, index) {
+        Modal.confirm({
+          title: tip,
+          content: 'Some descriptions',
+          okText: 'Yes',
+          okType: 'danger',
+          cancelText: 'No',
+          onOk() {
+            store.dispatch(deleteTodoItem(index))
+            console.log('OK');
+          },
+          onCancel() {
+            console.log('Cancel');
+          },
+        });
     }
 }
 

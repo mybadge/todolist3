@@ -1,4 +1,4 @@
-import { ADD_TODO, TODO_Text_Change } from "../action/action";
+import { ADD_TODO, TODO_Text_Change, DELETE_TODO } from "../action/action";
 
  const defaultState = {
      inputValue: '123',
@@ -12,10 +12,12 @@ import { ADD_TODO, TODO_Text_Change } from "../action/action";
             newState.inputValue = action.inputValue;
             return newState;
         case ADD_TODO:
-        newState.list.push(action.inputValue);
-        newState.inputValue = '';
-        return newState;
-
+            newState.list.push(action.inputValue);
+            newState.inputValue = '';
+            return newState;
+        case DELETE_TODO:
+            newState.list.splice(action.index, 1);
+            return newState;
     }
      return state;
  }

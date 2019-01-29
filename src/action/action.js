@@ -3,6 +3,7 @@
  */
 
 export const ADD_TODO = 'ADD_TODO'
+export const DELETE_TODO = 'DELETE_TODO'
 export const TODO_Text_Change = 'TODO_Text_Change'
 export const TOGGLE_TODO = 'TOGGLE_TODO'
 export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER'
@@ -26,6 +27,10 @@ export function addTodo(text) {
 
 export function textChange(text) {
   return { type: TODO_Text_Change, inputValue: text }
+}
+
+export function deleteTodoItem(index) {
+  return { type: DELETE_TODO, index }
 }
 
 export function toggleTodo(index) {
