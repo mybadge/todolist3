@@ -1,8 +1,8 @@
 import { ADD_TODO, TODO_TEXT_CHANGE, DELETE_TODO, ADD_TODO_ITEM } from "../action/action";
 
  const defaultState = {
-     inputValue: '123',
-     list: [2,3]
+     inputValue: '',
+     list: []
  }
 /// 笔记本
  export default (state = defaultState, action) => {

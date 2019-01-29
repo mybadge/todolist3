@@ -3,14 +3,6 @@ import { Input, Button, List, Alert, Modal } from 'antd';
 import store from './../store';
 import { addTodo, textChange, deleteTodoItem, add_todo_item } from '../action/action';
 
-// const data = [
-//   'Racing car sprays burning fuel into crowd.',
-//   'Japanese princess to wed commoner.',
-//   'Australian walks 100km after outback crash.',
-//   'Man charged over missing wedding girl.',
-//   'Los Angeles battles huge wildfires.',
-// ];
-
 class TodoList extends React.Component {
 
     constructor(props) {
