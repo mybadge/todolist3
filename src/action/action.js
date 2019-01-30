@@ -1,3 +1,6 @@
+
+import axios from 'axios';
+
 /*
  * action 类型
  */
@@ -9,7 +12,7 @@ export const TODO_TEXT_CHANGE = 'TODO_Text_Change'
 export const TOGGLE_TODO = 'TOGGLE_TODO'
 export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER'
 export const INIT_TODO_LIST = 'init_todo_list'
-
+export const GET_REMOTE_LIST = 'get_remote_list'
 /*
  * 其它的常量
  */
@@ -52,4 +55,18 @@ export function toggleTodo(index) {
 
 export function setVisibilityFilter(filter) {
   return { type: SET_VISIBILITY_FILTER, filter }
+}
+
+export function getRemoteDataList() {
+  return (dispatch) => {
+    axios.get('http://localhost/api/list2.php').then((res)=> {
+      var resp = res.data;
+      if (resp.code === 200) {
+        const action = initListAction(resp.data);
+        dispatch(action);
+      }
+    }).catch((e)=> {
+      console.log("e:" + e);
+    })
+  };
 }

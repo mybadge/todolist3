@@ -1,8 +1,8 @@
 import React from 'react';
 import store from './../store';
-import { textChange, deleteTodoItem, add_todo_item, initListAction } from '../action/action';
+import { textChange, deleteTodoItem, add_todo_item, getRemoteDataList } from '../action/action';
 import TodoListUI from './TodoListUI';
-import axios from 'axios';
+
 
 class TodoList extends React.Component {
 
@@ -10,8 +10,6 @@ class TodoList extends React.Component {
       super(props);
       
       this.state = store.getState();
-      console.log(this.state);
-
       this.handleInputValueChange = this.handleInputValueChange.bind(this);
       this.handleBtnClickAction = this.handleBtnClickAction.bind(this);
 			this.handleStoreChange = this.handleStoreChange.bind(this);
@@ -32,17 +30,11 @@ class TodoList extends React.Component {
 		}
 		
 		componentWillMount() {
-			axios.get('http://localhost/todolist/list.json').then((res)=> {
-				console.log(res.data);
-				store.dispatch(initListAction(res.data));
-
-			}).catch((e)=> {
-				console.log("e:" + e);
-			})
+			const action = getRemoteDataList();
+			store.dispatch(action);
 		}
 
     handleInputValueChange(e) {
-        console.log("aa=" + e.target.value);
         store.dispatch(textChange(e.target.value));
     }
 
