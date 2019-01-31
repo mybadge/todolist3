@@ -10,7 +10,7 @@ import TodoList from './view/TodoList';
 
 
 const App = (
-    <Provider store={store}>
+    <Provider store={ store }>
         <TodoList />
     </Provider>
 )
